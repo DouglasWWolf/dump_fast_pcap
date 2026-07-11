@@ -198,7 +198,7 @@ void execute()
     );
 
     // Tell the world what we just did
-    printf("%u packets written to %s\n", written, config.filename.c_str());
+    printf("%8u packets written to %s\n", written, config.filename.c_str());
 
 }
 //=================================================================================================
