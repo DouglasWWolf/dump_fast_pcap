@@ -73,7 +73,7 @@ int main(int argc, const char** argv)
 void showHelp()
 {
     printf("dump_fast_pcap v%s\n", SOFTWARE_REV);
-    printf("dump_fast_pcap [options] [filename]\n");
+    printf("dump_fast_pcap [options] <filename>\n");
     printf("  [options] are:\n");
     printf("    -packets <n>\n");
     printf("    -blocks <n>\n");
