@@ -35,6 +35,7 @@ struct
     uint32_t    max_packets = 1000;    
     uint32_t    max_blocks  = 0;
     uint32_t    tsfreq      = 322625265;
+    uint64_t    addr        = 0x100000000;
     string      filename    = "";
 
 } config;
@@ -76,6 +77,7 @@ void showHelp()
     printf("  [options] are:\n");
     printf("    -packets <n>\n");
     printf("    -blocks <n>\n");
+    printf("    -addr <n>\n");
     printf("    -tsfreq <n>\n");
 
     exit(1);
@@ -86,7 +88,6 @@ void showHelp()
 
 //=============================================================================
 // parseCommandLine() - Parses the command line parameters
-//
 //=============================================================================
 void parseCommandLine(const char** argv)
 {
@@ -113,6 +114,15 @@ void parseCommandLine(const char** argv)
             if (ptr == nullptr) showHelp();
             config.max_blocks = strtoul(ptr, 0, 0);
             if (config.max_blocks < 1) showHelp();
+            continue;
+        }
+
+        else if (token == "-addr")
+        {
+            ptr = argv[i++];
+            if (ptr == nullptr) showHelp();
+            config.addr = strtoul(ptr, 0, 0);
+            if (config.addr < 0x100000000) showHelp();
             continue;
         }
 
