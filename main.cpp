@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <iostream>
 #include <cstring>
-//#include <fcntl.h>
 #include <cstdint>
 #include "PhysMem.h"
 #include "pcap.h"
@@ -37,7 +36,6 @@ struct
     uint32_t    tsfreq      = 322625265;
     uint64_t    addr        = 0x100000000;
     string      filename    = "";
-
 } config;
 
 
@@ -186,7 +184,7 @@ void execute()
     if (block_count < 4) block_count = 4;
 
     // Map our RAM into userspace
-    RAM.map(0x100000000, block_count * BLOCK_SIZE);
+    RAM.map(config.addr, block_count * BLOCK_SIZE);
 
     // Dump our packets to a file in PCAP format
     uint32_t written = PCAP.dump_to_file
