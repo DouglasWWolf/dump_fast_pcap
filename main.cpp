@@ -172,7 +172,7 @@ void execute()
    
     // It's not possible for 'n' packets to require more than
     // n*3 4KB blocks of RAM.
-    int block_count = config.max_packets * 3;
+    uint64_t block_count = config.max_packets * 3;
 
     // Make sure we don't try to map more blocks than we were told to
     if (config.max_blocks && block_count > config.max_blocks)
@@ -183,6 +183,9 @@ void execute()
 
     // Always map 4 blocks so that we have at least one packet present
     if (block_count < 4) block_count = 4;
+
+    // Map the contiguous RAM buffer into userspace
+    RAM.map(config.addr, block_count*4096);
 
     // Dump our packets to a file in PCAP format
     uint32_t written = PCAP.dump_to_file

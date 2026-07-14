@@ -78,7 +78,7 @@ uint32_t CPCAP::dump_to_file
     pcap_header_t header;
     ram_header_t  ram_header;
     uint32_t      packets_written = 0;
-
+ 
     // Get a pointer to the filename
     const char* filename = fn.c_str();
    
