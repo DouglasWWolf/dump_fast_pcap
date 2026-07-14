@@ -105,7 +105,7 @@ void parseCommandLine(const char** argv)
             if (config.max_packets == 0) showHelp();
             continue;
         }
-
+        
         else if (token == "-blocks")
         {
             ptr = argv[i++];
@@ -169,6 +169,7 @@ void parseCommandLine(const char** argv)
 //=============================================================================
 void execute()
 {
+   
     // It's not possible for 'n' packets to require more than
     // n*3 4KB blocks of RAM.
     int block_count = config.max_packets * 3;
@@ -182,9 +183,6 @@ void execute()
 
     // Always map 4 blocks so that we have at least one packet present
     if (block_count < 4) block_count = 4;
-
-    // Map our RAM into userspace
-    RAM.map(config.addr, block_count * BLOCK_SIZE);
 
     // Dump our packets to a file in PCAP format
     uint32_t written = PCAP.dump_to_file
